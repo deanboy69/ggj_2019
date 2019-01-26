@@ -1,0 +1,23 @@
+
+
+-make folder
+
+
+git init
+
+git config --global user.name "YOUR GITHUB USERNAME"
+
+git clone http:...../.git
+
+git status
+
+git pull
+
+git add .
+
+git commit -m "message giving context for the commit"
+
+git push
+
+git status
+
