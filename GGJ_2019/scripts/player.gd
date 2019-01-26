@@ -1,6 +1,8 @@
 extends KinematicBody2D
 var speed = 5
 var pos = Vector2()
+var is_punching = false
+var is_kicking = false
 
 func _ready():
 	#var pos = get_global_position()
@@ -25,4 +27,6 @@ func player_input():
 	if Input.is_action_pressed("ui_right"):
 		position += Vector2(speed,0)
 	if Input.is_action_pressed("punch"):
-		pass
+		is_punching = true
+	if Input.is_action_pressed("kick"):
+		is_kicking = true
