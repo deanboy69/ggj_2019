@@ -1,16 +1,15 @@
 extends KinematicBody2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-onready var hobo1 = {'health':100,'punch':10,'kick':15,'skin':1}
-onready var hobo2 = {'health':100,'punch':10,'kick':15,'skin':2}
-onready var boss1 = {'health':150,'punch':20,'kick':30,'skin':1}
+
+
+
+onready var sprite = get_node("sprite")
+
+onready var unit
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	unit = stats.hobo1
+	sprite.set_texture(unit.skin)
 
 func _physics_process(delta):
 	pass
