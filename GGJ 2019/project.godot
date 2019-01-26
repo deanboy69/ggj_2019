@@ -11,8 +11,12 @@ config_version=3
 [application]
 
 config/name="GGJ 2019"
-run/main_scene="res://scenes/player.tscn"
+run/main_scene="res://scenes/Title_Screen.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/resizable=false
 
 [rendering]
 
