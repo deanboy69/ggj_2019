@@ -1,5 +1,6 @@
 extends Area2D
 
+onready var grunt = get_node('grunt')
 
 var timer
 var speed = 100
@@ -130,10 +131,14 @@ func _physics_process(delta):
 	
 
 func taking_damage():
+	randomize()
 	#damage_timer.start()
 	print('invincible')
 	sprite.frame = 0
 	health -= 1
+	var rand = rand_range(0,1)
+	if rand >= .6:
+		grunt.play()
 
 func movement():
 	if focus != null:
