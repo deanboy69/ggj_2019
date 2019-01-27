@@ -22,7 +22,7 @@ func _process(delta):
 
 func _on_Start_pressed():
 	print("hi")
-	get_tree().change_scene("res://scenes/First_level.tscn")
+	get_tree().change_scene("res://scenes/BigScene.tscn")
 	
 	
 	 # replace with function body
