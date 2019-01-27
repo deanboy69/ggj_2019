@@ -17,11 +17,13 @@ var direction
 var dist
 
 var avoid_timer
+var avoid_ending = false
 
 #ATTACK VARIABLES
 var punchable = false
 var punch_timer
 
+var damage_timer
 
 
 var colliding = false
@@ -31,11 +33,14 @@ var colliding_body
 
 onready var sprite = get_node("sprite")
 onready var unit
+onready var health
 
 func _ready():
 	unit = stats.hobo1_stats
 	sprite.set_texture(unit.skin)
+	sprite.set_frame(0)
 	self.add_to_group(unit.group)
+	health = unit.health
 	
 	timer = Timer.new()
 	timer.connect("timeout",self,"anim")
@@ -47,18 +52,25 @@ func _ready():
 	punch_timer = Timer.new()
 	punch_timer.connect("timeout",self,"punch")
 	add_child(punch_timer)
-	punch_timer.wait_time = 0.5
+	#punch_timer.one_shot = true
+	punch_timer.wait_time = .5
 	punch_timer.start()
 	
 	avoid_timer = Timer.new()
 	avoid_timer.one_shot = true
 	add_child(avoid_timer)
-	avoid_timer.wait_time = .5
+	avoid_timer.wait_time = 1
 	#avoid_timer.start()
+	
+	damage_timer = Timer.new()
+	damage_timer.one_shot = true
+	add_child(damage_timer)
+	damage_timer.wait_time = 1.5
 	
 	
 
 func _physics_process(delta):
+	#print(punchable)
 	#print(avoid_timer.time_left)
 	movement()
 	position += vel * delta
@@ -71,8 +83,11 @@ func _physics_process(delta):
 		scale.x = 1
 	if vel.x < 0:
 		scale.x = -1
+	
 	if vel.x == 0:
-		sprite.frame = 0
+		#if punchable == false:
+			#sprite.frame = 0
+		
 		if target_pos.x > position.x:
 			scale.x = 1
 		else:
@@ -84,6 +99,23 @@ func _physics_process(delta):
 	if unit == stats.boss1_stats:
 		pass
 		
+	if avoid_ending == true:
+		if avoid_timer.time_left == 0:
+			avoid_ending = false
+			chasing = true
+			avoiding = false
+		
+	if health == 0:
+		sprite.hide()
+		target = null
+		position = Vector2(0,1500)
+	
+
+func taking_damage():
+	#damage_timer.start()
+	print('invincible')
+	sprite.frame = 0
+	health -= 1
 
 func movement():
 	if focus != null:
@@ -95,18 +127,17 @@ func movement():
 				if dist <= 60:
 					if abs(target_pos.y - position.y) < 20:
 						vel = Vector2(0,0)
-						punch()
+						#punch()
 					
-		if focus.is_in_group('enemies'):
+		elif focus.is_in_group('enemies'):
 			if avoiding == true:
 				focus_pos = focus.position
 				dist = focus_pos.distance_to(position)
 				if target_pos.distance_to(focus_pos) < target_pos.distance_to(position):
-					
+					#avoid_timer.start()
 					vel = -(focus_pos - position).normalized() * speed
-					avoid_timer.start()
-						if avoid_timer.time_left == 0:
-							
+						#print('stop running away')
+						#focus = target	
 						#avoid_timer.start()
 				else:
 					avoiding = false
@@ -117,13 +148,20 @@ func movement():
 		if focus.is_in_group('objects'):
 			pass
 
+
+
 func punch():
 	if punchable == true:
-		
-		if sprite.frame != 5:
-			sprite.frame = 5
-		if sprite.frame == 5:
+		if sprite.frame == 0:
+			sprite.frame += 3
+		else:
 			sprite.frame = 0
+	
+		
+#		if sprite.frame != 5:
+#			sprite.frame = 5
+#		if sprite.frame == 5:
+#			sprite.frame = 0
 
 func anim():
 	if vel != Vector2(0,0):
@@ -152,17 +190,22 @@ func _on_enemy_area_entered(area):
 	
 	
 func _on_enemy_area_exited(area):
-	#print(area)
-	#rint(focus)
+
 	if area == focus:
-		#print("yes")
 		if focus.is_in_group('enemies'):
-			print(avoid_timer.time_left)
-			if avoid_timer.time_left == 0:
-				print("yes")
-				#avoiding = false
-				#chasing = true
-				print(focus.name)
+			avoid_timer.start()
+			avoid_ending = true
+			
+		#if avoid_timer.time_left > 0:
+			
+		
+		#if focus.is_in_group('enemies'):
+			#print(avoid_timer.time_left)
+			#if avoid_timer.time_left == 0:
+			#	print("yes")
+			#avoiding = false
+			#chasing = true
+			#	print(focus.name)
 		if focus.is_in_group('objects'):
 			sliding = false
 		
@@ -175,7 +218,20 @@ func _on_detect_radius_area_entered(area):
 		sliding = false
 		chasing = true
 		
-
+func _on_overlap_rect_area_entered(area):
+	#print(area.name)
+	
+	if area.position.y > position.y:
+		if area.z_index > z_index:
+			pass
+		elif area.z_index <= z_index:
+			area.z_index = z_index + 1
+	if area.position.y < position.y:
+		if area.z_index < z_index:
+			pass
+		elif area.z_index >= z_index:
+			area.z_index = z_index -1
+			
 
 #z index for layering. higher y, higher z (godot does increasing y value as you go lower)
 #don't overlap. use vector2 to determine if you are too close, also use z value to determine 
@@ -187,8 +243,12 @@ func _on_punch_rect_area_entered(area):
 	if area.is_in_group('players'):
 		punchable = true
 		
+		
 
 
 func _on_punch_rect_area_exited(area):
 	if area.is_in_group('players'):
 		punchable = false
+		
+
+

@@ -3,7 +3,7 @@ extends Node
 var player_stats = {'health':100,'punch':10,'kick':15,
 					'group':'players',					
 					'skin': preload('res://images/skins/player/player_char_atlas.png')}
-var hobo1_stats = {'health':100,'punch':10,'kick':15,
+var hobo1_stats = {'health':3,'punch':10,'kick':15,
 					'group':'enemies',
 					'skin': preload('res://images/skins/hobo1/hobo1_char_atlas.png')}
 var hobo2_stats = {'health':100,'punch':10,'kick':15,

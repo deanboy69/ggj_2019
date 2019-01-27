@@ -1,12 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-radius = 13.5
-height = 42.0
+extents = Vector2( 29.6048, 33.1321 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -18,9 +17,30 @@ extents = Vector2( 10, 10 )
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="player" type="Area2D" index="0"]
+[sub_resource type="RectangleShape2D" id=9]
+
+custom_solver_bias = 0.0
+extents = Vector2( 18.7735, 13.6841 )
+
+[sub_resource type="RectangleShape2D" id=10]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16.5004, 18.4749 )
+
+[sub_resource type="RectangleShape2D" id=11]
+
+custom_solver_bias = 0.0
+extents = Vector2( 21.5303, 13.0356 )
+
+[sub_resource type="RectangleShape2D" id=12]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16.9732, 18.7359 )
+
+[node name="player" type="Area2D"]
 
 position = Vector2( 106, 68.5 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -29,7 +49,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
@@ -40,8 +60,8 @@ _sections_unfolded = [ "Animation", "Region" ]
 
 [node name="body" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -15, -7 )
-shape = SubResource( 1 )
+position = Vector2( -16.5, -19.5 )
+shape = SubResource( 4 )
 
 [node name="punch_rect" type="Area2D" parent="." index="2"]
 
@@ -54,6 +74,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
 
 [node name="punch_body" type="CollisionShape2D" parent="punch_rect" index="0"]
 
@@ -72,11 +93,107 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
 
 [node name="kick_body" type="CollisionShape2D" parent="kick_rect" index="0"]
 
 position = Vector2( 1.88235, -0.627441 )
 scale = Vector2( 2.5098, 2.5098 )
 shape = SubResource( 3 )
+
+[node name="U" type="Area2D" parent="." index="4"]
+
+position = Vector2( -16.1257, -49.3362 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="U" index="0"]
+
+shape = SubResource( 9 )
+
+[node name="p_U" type="Position2D" parent="U" index="1"]
+
+[node name="R" type="Area2D" parent="." index="5"]
+
+position = Vector2( 13.4109, -20.8924 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="R" index="0"]
+
+position = Vector2( 4.04417, 0 )
+shape = SubResource( 10 )
+
+[node name="p_R" type="Position2D" parent="R" index="1"]
+
+position = Vector2( 3.8824, 0 )
+
+[node name="D" type="Area2D" parent="." index="6"]
+
+position = Vector2( -15.3724, 9.09888 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="D" index="0"]
+
+position = Vector2( 0, -1.29414 )
+shape = SubResource( 11 )
+
+[node name="p_D" type="Position2D" parent="D" index="1"]
+
+[node name="L" type="Area2D" parent="." index="7"]
+
+position = Vector2( -40.9772, -21.6019 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="L" index="0"]
+
+position = Vector2( -3, 0 )
+shape = SubResource( 12 )
+
+[node name="p_L" type="Position2D" parent="L" index="1"]
+
+position = Vector2( -3.72063, 0.323536 )
+
+[connection signal="area_entered" from="." to="." method="_on_player_area_entered"]
+
+[connection signal="area_entered" from="punch_rect" to="." method="_on_punch_rect_area_entered"]
+
+[connection signal="area_entered" from="U" to="." method="_on_U_area_entered"]
+
+[connection signal="area_exited" from="U" to="." method="_on_U_area_exited"]
+
+[connection signal="area_entered" from="R" to="." method="_on_R_area_entered"]
+
+[connection signal="area_exited" from="R" to="." method="_on_R_area_exited"]
+
+[connection signal="area_entered" from="D" to="." method="_on_D_area_entered"]
+
+[connection signal="area_exited" from="D" to="." method="_on_D_area_exited"]
+
+[connection signal="area_entered" from="L" to="." method="_on_L_area_entered"]
+
+[connection signal="area_exited" from="L" to="." method="_on_L_area_exited"]
 
 
