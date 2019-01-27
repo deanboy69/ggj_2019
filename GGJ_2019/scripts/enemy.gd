@@ -36,7 +36,17 @@ onready var sprite = get_node("sprite")
 onready var unit
 onready var health
 
+onready var type = 'hobo1'
+
 func _ready():
+	if type == 'hobo1':
+		unit = stats.hobo1_stats
+	if type == 'hobo2':
+		unit = stats.hobo2_stats
+	if type == 'goon1':
+		unit = stats.goon1_stats
+	if type == 'boss1':
+		unit = stats.boss_1_stats
 	unit = stats.hobo1_stats
 	sprite.set_texture(unit.skin)
 	sprite.set_frame(0)

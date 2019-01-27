@@ -196,7 +196,7 @@ func player_input():
 	if Input.is_action_just_pressed("kick"):
 		if is_punching == false:
 			is_kicking = true
-			sprite.frame = 4
+			#sprite.frame = 4
 			
 			
 	if Input.is_action_just_released("punch"):
@@ -206,7 +206,7 @@ func player_input():
 	if Input.is_action_just_released("kick"):
 		if is_kicking == true:
 
-			sprite.frame = 0
+			#sprite.frame = 0
 			is_kicking = false
 		
 func anim():

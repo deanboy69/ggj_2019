@@ -22,7 +22,7 @@ extents = Vector2( 19.7849, 17.1163 )
 custom_solver_bias = 0.0
 extents = Vector2( 28.9341, 30.6597 )
 
-[node name="enemy" type="Area2D" index="0"]
+[node name="enemy" type="Area2D"]
 
 position = Vector2( 386.704, 199.446 )
 z_as_relative = false
