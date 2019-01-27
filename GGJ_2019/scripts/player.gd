@@ -19,6 +19,7 @@ onready var p_d = get_node('D/p_D')
 onready var p_l = get_node('L/p_L')
 onready var p_r = get_node('R/p_R')
 
+onready var grunt = get_node('grunt')
 
 
 onready var unit
@@ -116,6 +117,7 @@ func take_damage(enemy):
 		if health_timer.time_left == 0:
 			health_timer.start()
 			health -= 1 * enemy.damage_boost
+			grunt.play()
 			#print('player_invincible')
 			print(health)
 	
@@ -196,7 +198,7 @@ func player_input():
 	if Input.is_action_just_pressed("kick"):
 		if is_punching == false:
 			is_kicking = true
-			sprite.frame = 4
+			#sprite.frame = 4
 			
 			
 	if Input.is_action_just_released("punch"):
@@ -206,7 +208,7 @@ func player_input():
 	if Input.is_action_just_released("kick"):
 		if is_kicking == true:
 
-			sprite.frame = 0
+			#sprite.frame = 0
 			is_kicking = false
 		
 func anim():

@@ -1,5 +1,6 @@
 extends Area2D
 
+onready var grunt = get_node('grunt')
 
 var timer
 var speed = 100
@@ -36,7 +37,17 @@ onready var sprite = get_node("sprite")
 onready var unit
 onready var health
 
+onready var type = 'hobo1'
+
 func _ready():
+	if type == 'hobo1':
+		unit = stats.hobo1_stats
+	if type == 'hobo2':
+		unit = stats.hobo2_stats
+	if type == 'goon1':
+		unit = stats.goon1_stats
+	if type == 'boss1':
+		unit = stats.boss_1_stats
 	unit = stats.hobo1_stats
 	sprite.set_texture(unit.skin)
 	sprite.set_frame(0)
@@ -120,10 +131,14 @@ func _physics_process(delta):
 	
 
 func taking_damage():
+	randomize()
 	#damage_timer.start()
 	print('invincible')
 	sprite.frame = 0
 	health -= 1
+	var rand = rand_range(0,1)
+	if rand >= .6:
+		grunt.play()
 
 func movement():
 	if focus != null:
