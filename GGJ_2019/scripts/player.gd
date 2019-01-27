@@ -51,9 +51,15 @@ var in_punching_range
 var in_kicking_range
 var target
 
+
+onready var health
+onready var health_timer
+var hit
+
 func _ready():
 	var unit = stats.player_stats
 	sprite.set_texture(unit.skin)
+	health = unit.health
 	self.add_to_group('players')
 	
 	move_timer = Timer.new()
@@ -64,15 +70,22 @@ func _ready():
 	
 	#pos_array = [U,D,L,R,UL,UR,DL,DR]
 	
-	
+	health_timer = Timer.new()
+	add_child(health_timer)
+	health_timer.one_shot = true
+	health_timer.wait_time = 1.5
 	
 	
 func _physics_process(delta):
 	#pos = get_global_position()
 	#print(p_u.get_global_position())
-	take_damage()
+	#take_damage()
 	if global.shift_level == false:
+		speed = 300
 		player_input()
+	elif global.shift_level == true:
+		sprite.frame = 0
+		speed = -300
 
 	if vel.x > 0:
 		scale.x = 1
@@ -94,13 +107,15 @@ func _physics_process(delta):
 	
 	position += vel * delta
 		
-	
-	
 		
-	
 
-func take_damage():
-	pass
+func take_damage(enemy):
+	if hit == true:
+		if health_timer.time_left == 0:
+			health_timer.start()
+			health -= 1 * enemy.damage_boost
+			#print('player_invincible')
+			print(health)
 	
 	
 	
@@ -239,13 +254,22 @@ func _on_L_area_exited(area):
 	if area.is_in_group('enemies'):
 		blocked_left = false
 
-
 func _on_punch_rect_area_entered(area):
-	
 	#print(area)
 	if area.is_in_group('enemies'):
 		target = area
 		in_punching_range = true
 		
-		
-		
+func _on_punch_rect_area_exited(area):
+	if area.is_in_group('enemies'):
+		target = null
+		in_punching_range = false
+
+func _on_hit_rect_area_entered(area):
+	hit = true
+
+func _on_hit_rect_area_exited(area):
+	hit = false
+
+
+

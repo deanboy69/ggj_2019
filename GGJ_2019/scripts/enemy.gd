@@ -24,6 +24,7 @@ var punchable = false
 var punch_timer
 
 var damage_timer
+var damage_boost
 
 
 var colliding = false
@@ -79,6 +80,11 @@ func _physics_process(delta):
 	#print(colliders)
 	
 	
+	if target != null:
+		if sprite.frame == 3:
+			#print('true')
+			target.take_damage(self)
+	
 	if vel.x > 0:
 		scale.x = 1
 	if vel.x < 0:
@@ -97,7 +103,9 @@ func _physics_process(delta):
 		focus = target
 	
 	if unit == stats.boss1_stats:
-		pass
+		damage_boost = 3
+	else:
+		damage_boost = 1
 		
 	if avoid_ending == true:
 		if avoid_timer.time_left == 0:
@@ -154,8 +162,11 @@ func punch():
 	if punchable == true:
 		if sprite.frame == 0:
 			sprite.frame += 3
+			
+			
 		else:
 			sprite.frame = 0
+			
 	
 		
 #		if sprite.frame != 5:
@@ -242,6 +253,7 @@ func _on_overlap_rect_area_entered(area):
 func _on_punch_rect_area_entered(area):
 	if area.is_in_group('players'):
 		punchable = true
+		#area.take_damage()
 		
 		
 
