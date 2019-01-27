@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=1]
+
+[node name="Boss_scene" type="Node2D"]
+
+position = Vector2( -10000, 0 )
+_sections_unfolded = [ "Pause", "Transform" ]
+
+[node name="enemy" parent="." index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 684.135, 490.495 )
+type = "'goon1'"
+
+[node name="enemy2" parent="." index="1" instance=ExtResource( 1 )]
+
+position = Vector2( 869.696, 263.296 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+type = "'boss1'"
+
+[node name="enemy3" parent="." index="2" instance=ExtResource( 1 )]
+
+position = Vector2( 682.483, 112.376 )
+type = "goon1"
+
+

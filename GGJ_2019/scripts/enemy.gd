@@ -17,6 +17,7 @@ var target_pos = Vector2()
 var direction
 var dist
 
+
 var avoid_timer
 var avoid_ending = false
 
@@ -37,7 +38,7 @@ onready var sprite = get_node("sprite")
 onready var unit
 onready var health
 
-onready var type = 'hobo1'
+export var type = 'hobo1'
 
 func _ready():
 	if type == 'hobo1':

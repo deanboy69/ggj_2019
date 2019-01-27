@@ -87,10 +87,11 @@ func _physics_process(delta):
 	if global.shift_level == false && global.can_move == true:
 		speed = 300
 		player_input()
+		
 	elif global.shift_level == true && global.can_move == true:
 		sprite.frame = 0
 		speed = -300
-	print(global.scene_num)
+	#print(global.scene_num)
 	if global.can_move == false:
 		vel.x = 0
 		global.scene_num += 1
