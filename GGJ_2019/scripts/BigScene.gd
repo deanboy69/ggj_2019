@@ -2,18 +2,88 @@ extends Node2D
 
 onready var Scene1 = get_node("Scene1")
 onready var Scene2 = get_node("Scene2")
-onready var Scene3 = get_node("Scene3")
-var speed = Vector2(-2,0)
-var speed2 = Vector2(-2,0)
-var speed3 = Vector2(-2,0)
+onready var player = get_node("player")
+onready var Next = get_node("NextLevel")
+var Level2 = false
+var speed = Vector2(0,0)
+var speed2 = Vector2(0,0)
+var did_shift = false
+
+const SCREEN_MIN_X = 0
+const SCREEN_MAX_X = 1000
+const SCREEN_MIN_Y = 0
+const SCREEN_MAX_Y = 600
+
+
+
+# class member variables go here, for example:
+# var a = 2
+# var b = "textvar"
 
 func _ready():
+	set_process(true)
+	set_process_input(true)
 	
-	pass
 
 func _process(delta):
+	print(player.position.x)
+	player.position.x = clamp(player.position.x, 60, SCREEN_MAX_X)
+	player.position.y = clamp(player.position.y, 250, SCREEN_MAX_Y-80)
 	Scene1.position += speed
 	Scene2.position += speed2
-	Scene3.position += speed3
+	if Scene1.position.x <= -1024:
+		Level2 = true
+		global.shift_level = false
+		speed = Vector2(0,0)
+		speed2 = Vector2(0,0)
 
+	var dist = player.position.x - Next.position.x
+	if dist >= -5:
+		if global.shift_level == false && Level2 == false:
+			global.shift_level = true ##need to add conditional HERE
+		if Level2 == false:
+				speed = Vector2(-3,0)
+				speed2 = Vector2(-3,0)
+				Next.position += Vector2(-10,0)
+				player.position += Vector2(-10,0)
+				did_shift = true
+				if Scene2.position.x <= 200:
+					Level2 = false
+					print('level 2 is false!')
+					global.shift_level = false
+					#player.position = Vector2(0,0)
+					
+	if dist < -5 and Level2 == false :
+		#print("stop")
+		#global.shift_level = false
+		speed = Vector2(0,0)
+		speed2 = Vector2(0,0)
+		player.position += Vector2(0,0)
+		
+		
+	#if elf2.position.x <= 514:
+	#	speed2 = Vector2(0,0)
+	#if elf.position.x <= -514:
+	#	speed = Vector2(0,0)
+	#if elf.position.x >=514:
+#	speed = Vector2(0,0)
+	#if elf2.position.x >= 1530:
+	#	speed2 = Vector2(0,0)
 	pass
+
+#func transition():
+#	var dist = player.position.x - Next.position.x
+#	if dist >= -5:
+#		global.shift_level = true
+#	if Level2 == false:
+#		#speed += Vector2(-.2,0)
+#		#speed2 += Vector2(-.2,0)
+#		Next.position += Vector2(-10,0)
+#		player.position += Vector2(-10,0)
+#		global.shift_level = true
+#	if dist < -5 and Level2 == false :
+#		#print("stop")
+#		#global.shift_level = false
+#		speed = Vector2(0,0)
+#		speed2 = Vector2(0,0)
+#		player.position += Vector2(0,0)	
