@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var elf = get_node("ELF")
-onready var elf2 = get_node("ELF2")
+#onready var elf2 = get_node("ELF2")
 onready var player = get_node("player")
 onready var Next = get_node("NextLevel")
 var Level2 = false

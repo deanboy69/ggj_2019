@@ -9,10 +9,10 @@ onready var U = get_node('U')
 onready var D = get_node('D')
 onready var L = get_node('L')
 onready var R = get_node('R')
-onready var UL = get_node('UL')
-onready var UR = get_node('UR')
-onready var DL = get_node('DL')
-onready var DR = get_node('DR')
+#onready var UL = get_node('UL')
+#onready var UR = get_node('UR')
+#onready var DL = get_node('DL')
+#onready var DR = get_node('DR')
 
 onready var p_u = get_node('U/p_U')
 onready var p_d = get_node('D/p_D')
@@ -20,7 +20,7 @@ onready var p_l = get_node('L/p_L')
 onready var p_r = get_node('R/p_R')
 
 onready var grunt = get_node('grunt')
-
+onready var can_move = global.can_move
 
 onready var unit
 
@@ -40,6 +40,7 @@ var moving_up = false
 var moving_down = false
 var moving_left = false
 var moving_right = false
+var veloc = 0
 
 var speed = 300
 var pos = Vector2()
@@ -62,6 +63,7 @@ func _ready():
 	sprite.set_texture(unit.skin)
 	health = unit.health
 	self.add_to_group('players')
+	global.can_move = true
 	
 	move_timer = Timer.new()
 	move_timer.connect("timeout",self,"anim")
@@ -82,13 +84,17 @@ func _physics_process(delta):
 	#pos = get_global_position()
 	#print(p_u.get_global_position())
 	#take_damage()
-	if global.shift_level == false:
+	if global.shift_level == false && global.can_move == true:
 		speed = 300
 		player_input()
-	elif global.shift_level == true:
+	elif global.shift_level == true && global.can_move == true:
 		sprite.frame = 0
 		speed = -300
-		
+	print(global.scene_num)
+	if global.can_move == false:
+		vel.x = 0
+		global.scene_num += 1
+		global.can_move = true
 
 	if vel.x > 0:
 		scale.x = 1
@@ -119,7 +125,7 @@ func take_damage(enemy):
 			health -= 1 * enemy.damage_boost
 			grunt.play()
 			#print('player_invincible')
-			print(health)
+			#print(health)
 	
 	
 	

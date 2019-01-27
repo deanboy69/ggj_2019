@@ -9,6 +9,7 @@ var Level2 = false
 var speed = Vector2(0,0)
 var speed2 = Vector2(0,0)
 var did_shift = false
+var can_add = true
 export var scroll_speed = 0
 export var scene_extents = 0
 
@@ -41,10 +42,13 @@ func _process(delta):
 		#print('can move scene!')
 		Scene1.position.x = 1037
 		Next.position.x = 984
+		global.can_move = true
 	var dist = player.position.x - Next.position.x
 	if dist >= -5:
-		if global.shift_level == false && Level2 == false:
-			global.shift_level = true ##need to add conditional HERE
+		if global.shift_level == false && Level2 == false && can_add == true:
+			global.shift_level = true
+			global.can_move = false
+			can_add = false ##need to add conditional HERE
 		if Level2 == false && global.scene_num <=3:
 				speed = Vector2(scroll_speed,0)
 				speed2 = Vector2(scroll_speed,0)
@@ -55,11 +59,13 @@ func _process(delta):
 					Level2 = false
 					global.shift_level = false
 					Level1 = false
-					global.scene_num += 1
-					print(global.scene_num)
+					global.can_move = false
+					
 					#player.position = Vector2(0,0)	
-		if global.shift_level == false && Level1 == false:
-			global.shift_level = true ##need to add conditional HERE
+		if global.shift_level == false && Level1 == false && can_add == true:
+			global.shift_level = true
+			can_add = false ##need to add conditional HERE
+			global.can_move = false
 		if Level1 == false:
 				speed = Vector2(scroll_speed,0)
 				speed2 = Vector2(scroll_speed,0)
@@ -70,7 +76,7 @@ func _process(delta):
 					Level1 = false
 					global.shift_level = false
 					Level2 = false
-					print(global.scene_num)
+					global.can_move = false
 					#player.position = Vector2(0,0)
 					
 	if dist < -5 and Level2 == false :
@@ -79,7 +85,6 @@ func _process(delta):
 		speed = Vector2(0,0)
 		speed2 = Vector2(0,0)
 		player.position += Vector2(0,0)
-		
 		
 	if Scene2.position.x <= -scene_extents:
 		Level1 = true
