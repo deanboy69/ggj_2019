@@ -13,7 +13,7 @@ height = 43.1267
 custom_solver_bias = 0.0
 extents = Vector2( 173.242, 413.291 )
 
-[node name="enemy" type="Area2D" index="0"]
+[node name="enemy" type="Area2D"]
 
 position = Vector2( 386.704, 199.446 )
 input_pickable = true

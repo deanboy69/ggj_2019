@@ -8,6 +8,9 @@ var vel = Vector2()
 var target
 var target_pos = Vector2()
 var direction
+var dist
+
+#var colliders = []
 
 var colliding = false
 var colliding_body
@@ -39,8 +42,10 @@ func _ready():
 
 func _physics_process(delta):
 	movement()
-	if stfu == false:
-		position += vel * delta
+	#if stfu == false:
+	position += vel * delta
+	#
+	#print(colliders)
 	
 	
 	if vel.x > 0:
@@ -54,6 +59,20 @@ func _physics_process(delta):
 		else:
 			scale.x = -1
 			
+	
+#	if colliders.empty() == false:
+#		for c in colliders:
+#			var c_pos = c.position
+#			if c_pos.distance_to(position) < 20:
+#				#print('too close')
+#				c.speed = 300
+#				if c_pos.x > position.x:
+#					c.speed = 300
+#				elif c_pos.x <= position.x:
+#					c.speed = rand_range(-1000,-600)
+#
+#			elif c_pos.distance_to(position) >= 20:
+#				speed = 100
 			
 	
 			
@@ -61,25 +80,32 @@ func _physics_process(delta):
 		pass
 		
 	
+
 	
 	
 	
 	
 func movement():
-	if colliding == true:
-		#print('colliding')
-		print(_priority)
-		print(colliding_body._priority)
-		if _priority < colliding_body._priority:
-			stfu = true
-		elif _priority > colliding_body.priority:
-			vel = vel * -100
-	else:
-		stfu = false
+#	if colliding == true:
+#		#print('colliding')
+#		#print(_priority)
+#		#print(colliding_body._priority)
+#		if dist > colliding_body.dist:
+#			vel.x *= -100
+#		if _priority < colliding_body._priority:
+#			stfu = true
+#		elif _priority > colliding_body.priority:
+#			vel = vel * -.3
+#	else:
+#		stfu = false
 	if target != null:
+		dist = target_pos.distance_to(position)
 		target_pos = target.position
+		#if colliding == false:
 		vel = (target_pos - position).normalized() * speed
-		if target_pos.distance_to(position) < 40:
+		#elif colliding == true:
+		#	disperse()
+		if dist < 40:
 			if abs(target_pos.y - position.y) < 20:
 				vel = Vector2(0,0)
 		#print(target_pos.distance_to(position))
@@ -104,6 +130,8 @@ func _on_enemy_area_entered(area):
 		#print('asdf')
 		#print('asdf')
 		colliding_body = area
+		global.enemy_colliders.append(self)
+		#print('collider added')
 		colliding = true
 	#print(area.name)
 	if area.name == 'player':
@@ -112,6 +140,9 @@ func _on_enemy_area_entered(area):
 func _on_enemy_area_exited(area):
 	if area == colliding_body:
 		colliding = false
+		global.enemy_colliders.erase(self)
+		#global.enemy_colliders.erase(colliding_body)
+		#print('collider removed')
 
 func _on_detect_radius_area_entered(area):
 	if area.name == 'player':
