@@ -4,6 +4,8 @@ onready var elf = get_node("ELF")
 onready var elf2 = get_node("ELF2")
 var speed = Vector2(0,0)
 var speed2 = Vector2(0,0)
+onready var IntroMusic = get_node("IntroMusic")
+
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -11,18 +13,16 @@ var speed2 = Vector2(0,0)
 func _ready():
  set_process(true)
  set_process_input(true)
+ IntroMusic.play()
 
 func _process(delta):
 	elf.position += speed
-	elf2.position += speed2
-	if elf2.position.x <= 514:
-		speed2 = Vector2(0,0)
 
 
 
 func _on_Start_pressed():
 	print("hi")
-	elf.modulate = Color(.2,.1,.3,.5)
+	get_tree().change_scene("res://scenes/First_level.tscn")
 	
 	
 	 # replace with function body
