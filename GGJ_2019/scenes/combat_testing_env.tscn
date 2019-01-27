@@ -4,11 +4,7 @@
 [ext_resource path="res://scenes/dummy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
 
-<<<<<<< HEAD
-[node name="combat_testing_env" type="Node"]
-=======
 [node name="combat_testing_env" type="Node" index="0"]
->>>>>>> ad3158f6d85fce87ee53a76ef0b81736e44ef6cd
 
 [node name="enemy" parent="." index="0" instance=ExtResource( 1 )]
 

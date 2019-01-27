@@ -3,11 +3,10 @@
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://images/skins/hobo1/hobo1_char_atlas.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-radius = 36.9921
-height = 20.3393
+extents = Vector2( 19.9426, 26.1541 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -43,8 +42,8 @@ _sections_unfolded = [ "Animation", "Material", "Offset", "Visibility" ]
 
 [node name="body" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -11.9164, -8.3415 )
-shape = SubResource( 1 )
+position = Vector2( -8.16507, -15.1621 )
+shape = SubResource( 4 )
 
 [node name="detect_radius" type="Area2D" parent="." index="2"]
 

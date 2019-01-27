@@ -16,6 +16,7 @@ var target_pos = Vector2()
 var direction
 var dist
 
+var avoid_timer
 
 #ATTACK VARIABLES
 var punchable = false
@@ -49,10 +50,16 @@ func _ready():
 	punch_timer.wait_time = 0.5
 	punch_timer.start()
 	
+	avoid_timer = Timer.new()
+	avoid_timer.one_shot = true
+	add_child(avoid_timer)
+	avoid_timer.wait_time = .5
+	#avoid_timer.start()
+	
 	
 
 func _physics_process(delta):
-	
+	#print(avoid_timer.time_left)
 	movement()
 	position += vel * delta
 	#check state, if state is seek: go to target the player. if obstructed, find obstruction type.
@@ -95,7 +102,12 @@ func movement():
 				focus_pos = focus.position
 				dist = focus_pos.distance_to(position)
 				if target_pos.distance_to(focus_pos) < target_pos.distance_to(position):
+					
 					vel = -(focus_pos - position).normalized() * speed
+					avoid_timer.start()
+						if avoid_timer.time_left == 0:
+							
+						#avoid_timer.start()
 				else:
 					avoiding = false
 					chasing = true
@@ -107,7 +119,7 @@ func movement():
 
 func punch():
 	if punchable == true:
-		print('asdfasdfasdf')
+		
 		if sprite.frame != 5:
 			sprite.frame = 5
 		if sprite.frame == 5:
@@ -140,10 +152,17 @@ func _on_enemy_area_entered(area):
 	
 	
 func _on_enemy_area_exited(area):
+	#print(area)
+	#rint(focus)
 	if area == focus:
+		#print("yes")
 		if focus.is_in_group('enemies'):
-			avoiding = false
-			chasing = true
+			print(avoid_timer.time_left)
+			if avoid_timer.time_left == 0:
+				print("yes")
+				#avoiding = false
+				#chasing = true
+				print(focus.name)
 		if focus.is_in_group('objects'):
 			sliding = false
 		
@@ -167,7 +186,7 @@ func _on_detect_radius_area_entered(area):
 func _on_punch_rect_area_entered(area):
 	if area.is_in_group('players'):
 		punchable = true
-		print('punchable')
+		
 
 
 func _on_punch_rect_area_exited(area):
