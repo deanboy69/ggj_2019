@@ -14,5 +14,5 @@ func _process(delta):
 	for i in range(0,global.enemy_colliders.size()):
 		print(i)#enemy in global.enemy_colliders:
 		#if enemy.colliding == true:
-			
+		
 

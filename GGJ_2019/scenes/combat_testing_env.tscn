@@ -23,10 +23,10 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="dummy" parent="." index="3" instance=ExtResource( 3 )]
 
-position = Vector2( 737.981, 84.2238 )
+position = Vector2( 234.112, 153.942 )
 
 [node name="chump" parent="." index="4" instance=ExtResource( 4 )]
 
-position = Vector2( 96.956, 377.505 )
+position = Vector2( 1320.19, 551.799 )
 
 

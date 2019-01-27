@@ -1,11 +1,11 @@
-extends Sprite
+extends Area2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+onready var unit
+
 
 func _ready():
-	self.add_to_group('players')
+	unit = stats.player_stats
+	self.add_to_group(unit.group)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

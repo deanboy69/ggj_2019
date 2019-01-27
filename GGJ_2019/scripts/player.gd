@@ -41,9 +41,7 @@ func _physics_process(delta):
 	take_damage()
 	if global.shift_level == false:
 		player_input()
-		
-	
-	
+
 	if vel.x > 0:
 		scale.x = 1
 	if vel.x < 0:
@@ -51,7 +49,6 @@ func _physics_process(delta):
 		
 	if colliding == false:
 		position += vel * delta
-
 
 func take_damage():
 	pass
@@ -64,19 +61,15 @@ func player_input():
 			if Input.is_action_pressed("ui_up"):
 				is_moving = true
 				vel = Vector2(0,-speed)
-				#position += vel * delta
 			if Input.is_action_pressed("ui_down"):
 				is_moving = true
 				vel = Vector2(0,speed)
-				#position += vel
 			if Input.is_action_pressed("ui_left"):
 				is_moving = true
 				vel = Vector2(-speed,0)
-				#position += vel
 			if Input.is_action_pressed("ui_right"):
 				is_moving = true
 				vel = Vector2(speed,0)
-				#position += vel
 
 	
 	if Input.is_action_just_released("ui_up"):
