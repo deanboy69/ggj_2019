@@ -23,7 +23,7 @@ var is_moving = false
 func _ready():
 	var unit = stats.player_stats
 	sprite.set_texture(unit.skin)
-	
+	self.add_to_group('players')
 	
 	move_timer = Timer.new()
 	move_timer.connect("timeout",self,"anim")

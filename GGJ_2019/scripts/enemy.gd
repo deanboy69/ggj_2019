@@ -44,7 +44,8 @@ func _physics_process(delta):
 	movement()
 	#if stfu == false:
 	position += vel * delta
-	#
+	#check state, if state is seek: go to target the player. if obstructed, find obstruction type.
+	#if type object, try moving. if type enemy, stop, do calc for timeout on move.
 	#print(colliders)
 	
 	
@@ -145,5 +146,12 @@ func _on_enemy_area_exited(area):
 		#print('collider removed')
 
 func _on_detect_radius_area_entered(area):
-	if area.name == 'player':
+	if area.is_in_group('players'):
 		target = area
+
+
+#z index for layering. higher y, higher z (godot does increasing y value as you go lower)
+#don't overlap. use vector2 to determine if you are too close, also use z value to determine 
+#"in front of" or "behind". then: stop and wait, or repath. same logic for overlapping player.
+#only thing we need to add: if the object you are about to overlap is the player, start attacking.
+#get state machine for motion up and running, then attacking.
