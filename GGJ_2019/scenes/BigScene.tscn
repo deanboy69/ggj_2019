@@ -1,36 +1,39 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/BigScene.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Scene_1-1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Scene_1-2.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://images/sprites/background.png" type="Texture" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+scroll_speed = -7
+scene_extents = 1052
 
-[node name="Scene1" parent="." index="0" instance=ExtResource( 2 )]
+[node name="Scene1" type="Sprite" parent="." index="0"]
 
-position = Vector2( -0.0632935, -3.94153 )
-_sections_unfolded = [ "Transform" ]
+position = Vector2( -15, -12 )
+scale = Vector2( 2.69908, 2.86889 )
+texture = ExtResource( 2 )
+offset = Vector2( 213, 121 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Scene2" parent="." index="1" instance=ExtResource( 3 )]
+[node name="Scene2" type="Sprite" parent="." index="1"]
 
-position = Vector2( 1022.3, -3.08966 )
-_sections_unfolded = [ "Transform" ]
+position = Vector2( 1037, -12 )
+scale = Vector2( 2.69908, 2.86889 )
+texture = ExtResource( 2 )
+offset = Vector2( 213, 121 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Scene3" parent="." index="2" instance=ExtResource( 2 )]
-
-position = Vector2( 2047.5, 2.78949 )
-
-[node name="player" parent="." index="3" instance=ExtResource( 4 )]
+[node name="player" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 74.1768, 413.927 )
 
-[node name="NextLevel" type="Node2D" parent="." index="4"]
+[node name="NextLevel" type="Node2D" parent="." index="3"]
 
-position = Vector2( 729.304, 422.589 )
+position = Vector2( 984, 309 )
 scale = Vector2( 0.576974, 7.125 )
 _sections_unfolded = [ "Transform" ]
 
@@ -38,10 +41,10 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( 413.171, -10.6295 )
 scale = Vector2( 2.50895, 1 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Tween" type="Tween" parent="." index="5"]
+[node name="Tween" type="Tween" parent="." index="4"]
 
 repeat = false
 playback_process_mode = 1
