@@ -83,9 +83,11 @@ func _physics_process(delta):
 	if global.shift_level == false:
 		speed = 300
 		player_input()
+		print("input time!")
 	elif global.shift_level == true:
 		sprite.frame = 0
 		speed = -300
+		
 
 	if vel.x > 0:
 		scale.x = 1
@@ -208,13 +210,14 @@ func player_input():
 			is_kicking = false
 		
 func anim():
-	if is_punching == false:
-		if is_kicking == false:	
-			if is_moving == true:
-				if sprite.frame < 2:
-					sprite.frame = sprite.frame + 1
-				else:
-					sprite.frame = 0
+	if global.shift_level == false:
+		if is_punching == false:
+			if is_kicking == false:	
+				if is_moving == true:
+					if sprite.frame < 2:
+						sprite.frame = sprite.frame + 1
+					else:
+						sprite.frame = 0
 
 
 func _on_player_area_entered(area):

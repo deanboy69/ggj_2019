@@ -15,8 +15,7 @@
 [ext_resource path="res://images/sprites/Cone1.png" type="Texture" id=13]
 [ext_resource path="res://images/sprites/crack1.png" type="Texture" id=14]
 
-
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Sprite" index="0"]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -369,50 +368,56 @@ texture = ExtResource( 2 )
 flip_v = true
 _sections_unfolded = [ "Offset" ]
 
-[node name="Grass" type="Sprite" parent="." index="59"]
+[node name="Grass2" type="Sprite" parent="." index="59"]
+
+position = Vector2( 173.582, 292.141 )
+scale = Vector2( 1, 1.01859 )
+texture = ExtResource( 3 )
+
+[node name="Grass7" type="Sprite" parent="." index="60"]
+
+position = Vector2( 765.409, 289.449 )
+scale = Vector2( 1, 1.10333 )
+texture = ExtResource( 3 )
+
+[node name="Grass6" type="Sprite" parent="." index="61"]
+
+position = Vector2( 643.798, 289.427 )
+scale = Vector2( 1, 1.10393 )
+texture = ExtResource( 3 )
+
+[node name="Grass5" type="Sprite" parent="." index="62"]
+
+position = Vector2( 526.729, 289.556 )
+scale = Vector2( 1, 1.10035 )
+texture = ExtResource( 3 )
+
+[node name="Grass4" type="Sprite" parent="." index="63"]
+
+position = Vector2( 404.243, 290.644 )
+scale = Vector2( 1, 1.07012 )
+texture = ExtResource( 3 )
+
+[node name="Grass3" type="Sprite" parent="." index="64"]
+
+position = Vector2( 287.042, 291.257 )
+scale = Vector2( 1, 1.05309 )
+texture = ExtResource( 3 )
+
+[node name="Starter" type="Sprite" parent="." index="65"]
 
 position = Vector2( 63.1194, 292.83 )
 scale = Vector2( 0.986488, 1 )
 texture = ExtResource( 3 )
 
-[node name="Grass5" type="Sprite" parent="." index="60"]
-
-position = Vector2( 531.748, 290.78 )
-texture = ExtResource( 3 )
-
-[node name="Grass3" type="Sprite" parent="." index="61"]
-
-position = Vector2( 291.834, 290.78 )
-texture = ExtResource( 3 )
-
-[node name="Grass7" type="Sprite" parent="." index="62"]
-
-position = Vector2( 761.409, 288.729 )
-texture = ExtResource( 3 )
-
-[node name="Grass2" type="Sprite" parent="." index="63"]
-
-position = Vector2( 174.224, 292.83 )
-texture = ExtResource( 3 )
-
-[node name="Grass6" type="Sprite" parent="." index="64"]
-
-position = Vector2( 643.798, 290.78 )
-texture = ExtResource( 3 )
-
-[node name="Grass4" type="Sprite" parent="." index="65"]
-
-position = Vector2( 403.885, 290.78 )
-texture = ExtResource( 3 )
-
 [node name="Grass8" type="Sprite" parent="." index="66"]
 
-position = Vector2( 873.459, 288.729 )
+position = Vector2( 873.459, 292.729 )
 texture = ExtResource( 3 )
 
 [node name="Grass9" type="Sprite" parent="." index="67"]
 
-position = Vector2( 958.459, 288.729 )
+position = Vector2( 958.459, 292.729 )
 texture = ExtResource( 3 )
 
 [node name="Wall" type="Sprite" parent="." index="68"]

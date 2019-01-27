@@ -40,17 +40,17 @@ func _process(delta):
 	
 	
 	var dist = player.position.x - Next.position.x
-	if dist >= -6 and Level2 == false:
+	if dist >= -5 and Level2 == false:
 		#print("next level")
 		#global.shift_level = true
-		speed += Vector2(-.05,0)
-		speed2 += Vector2(-.05,0)
-		#Next.position += Vector2(-5,0)
-		player.position += Vector2(-2,0)
-		global.shift_level = false
+		speed += Vector2(-.1,0)
+		speed2 += Vector2(-.1,0)
+		Next.position += Vector2(-5,0)
+		player.position += Vector2(-3,0)
+		global.shift_level = true
 	if dist < -5:
 		#print("stop")
-		#global.shift_level = false
+		global.shift_level = false
 		speed = Vector2(0,0)
 		speed2 = Vector2(0,0)
 		player.position += Vector2(0,0)
