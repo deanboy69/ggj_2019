@@ -6,6 +6,7 @@ var enemy_colliders = []
 
 var colliding_vels = [Vector2(-100,100),Vector2(-100,-100),Vector2(100,100),Vector2(100,-100)]
 
+var scene_num = 0
 var game_over = false
 var endgame = false
 var stage_1_beaten = 0
