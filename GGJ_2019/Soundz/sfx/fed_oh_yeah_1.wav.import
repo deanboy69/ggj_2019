@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fed_oh_yeah_1.wav-0074573be8c4ff9249633a4788fc8bb7.sample"
+
+[deps]
+
+source_file="res://Soundz/sfx/fed_oh_yeah_1.wav"
+dest_files=[ "res://.import/fed_oh_yeah_1.wav-0074573be8c4ff9249633a4788fc8bb7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

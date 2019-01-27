@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="AudioStreamSample" id=1]
+
+format = 0
+loop_mode = 0
+loop_begin = 0
+loop_end = 0
+mix_rate = 44100
+stereo = false
+data = PoolByteArray(  )
+
+[node name="global" type="Node" index="0"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="0"]
+
+stream = SubResource( 1 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+
