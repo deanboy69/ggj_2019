@@ -84,7 +84,6 @@ func _physics_process(delta):
 	if global.shift_level == false:
 		speed = 300
 		player_input()
-		print("input time!")
 	elif global.shift_level == true:
 		sprite.frame = 0
 		speed = -300

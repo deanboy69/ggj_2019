@@ -4,7 +4,7 @@ onready var Scene1 = get_node("Scene1")
 onready var Scene2 = get_node("Scene2")
 onready var player = get_node("player")
 onready var Next = get_node("NextLevel")
-var Level1 = false
+var Level1 = true
 var Level2 = false
 var speed = Vector2(0,0)
 var speed2 = Vector2(0,0)
@@ -29,7 +29,6 @@ func _ready():
 	
 
 func _process(delta):
-	print(Next.position.x)
 	player.position.x = clamp(player.position.x, 60, SCREEN_MAX_X)
 	player.position.y = clamp(player.position.y, 250, SCREEN_MAX_Y-80)
 	Scene1.position += speed
@@ -46,7 +45,7 @@ func _process(delta):
 	if dist >= -5:
 		if global.shift_level == false && Level2 == false:
 			global.shift_level = true ##need to add conditional HERE
-		if Level2 == false:
+		if Level2 == false && global.scene_num <=3:
 				speed = Vector2(scroll_speed,0)
 				speed2 = Vector2(scroll_speed,0)
 				Next.position += Vector2(-10,0)
@@ -55,6 +54,23 @@ func _process(delta):
 				if Scene2.position.x <= 200:
 					Level2 = false
 					global.shift_level = false
+					Level1 = false
+					global.scene_num += 1
+					print(global.scene_num)
+					#player.position = Vector2(0,0)	
+		if global.shift_level == false && Level1 == false:
+			global.shift_level = true ##need to add conditional HERE
+		if Level1 == false:
+				speed = Vector2(scroll_speed,0)
+				speed2 = Vector2(scroll_speed,0)
+				Next.position += Vector2(-10,0)
+				player.position += Vector2(-10,0)
+				did_shift = true
+				if Scene1.position.x <= 200:
+					Level1 = false
+					global.shift_level = false
+					Level2 = false
+					print(global.scene_num)
 					#player.position = Vector2(0,0)
 					
 	if dist < -5 and Level2 == false :
@@ -74,19 +90,6 @@ func _process(delta):
 		Scene2.position.x = 1037
 		Next.position.x = 984
 
-	if dist >= -5:
-		if global.shift_level == false && Level1 == false:
-			global.shift_level = true ##need to add conditional HERE
-		if Level1 == false:
-				speed = Vector2(scroll_speed,0)
-				speed2 = Vector2(scroll_speed,0)
-				Next.position += Vector2(-10,0)
-				player.position += Vector2(-10,0)
-				did_shift = true
-				if Scene1.position.x <= 200:
-					Level1 = false
-					global.shift_level = false
-					#player.position = Vector2(0,0)
 					
 	if dist < -5 and Level1 == false :
 		#print("stop")
