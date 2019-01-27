@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 onready var sprite = get_node('sprite')
 onready var body = get_node('body')
@@ -8,6 +8,9 @@ onready var kick_rect = get_node('kick_rect')
 onready var unit
 
 var move_timer 
+
+var colliding = false
+var collision_list = []
 
 
 var speed = 500
@@ -46,7 +49,8 @@ func _physics_process(delta):
 	if vel.x < 0:
 		scale.x = -1
 		
-	position += vel * delta
+	if colliding == false:
+		position += vel * delta
 
 
 func take_damage():
@@ -121,3 +125,4 @@ func anim():
 					sprite.frame = sprite.frame + 1
 				else:
 					sprite.frame = 0
+

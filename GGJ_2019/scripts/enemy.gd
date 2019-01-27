@@ -9,6 +9,11 @@ var target
 var target_pos = Vector2()
 var direction
 
+var colliding = false
+var colliding_body
+var _priority
+var stfu = false
+
 onready var sprite = get_node("sprite")
 
 onready var unit
@@ -16,7 +21,7 @@ onready var unit
 func _ready():
 	unit = stats.hobo1_stats
 	sprite.set_texture(unit.skin)
-	
+	self.add_to_group(unit.group)
 	
 	timer = Timer.new()
 	timer.connect("timeout",self,"anim")
@@ -24,6 +29,9 @@ func _ready():
 	timer.wait_time = 0.2
 	timer.start()
 	
+	randomize()
+	_priority = rand_range(1,20)
+#	print(priority)
 	
 	
 	
@@ -31,7 +39,8 @@ func _ready():
 
 func _physics_process(delta):
 	movement()
-	position += vel * delta
+	if stfu == false:
+		position += vel * delta
 	
 	
 	if vel.x > 0:
@@ -44,11 +53,29 @@ func _physics_process(delta):
 			scale.x = 1
 		else:
 			scale.x = -1
+			
+			
+	
+			
+	if unit == stats.boss1_stats:
+		pass
+		
+	
 	
 	
 	
 	
 func movement():
+	if colliding == true:
+		#print('colliding')
+		print(_priority)
+		print(colliding_body._priority)
+		if _priority < colliding_body._priority:
+			stfu = true
+		elif _priority > colliding_body.priority:
+			vel = vel * -100
+	else:
+		stfu = false
 	if target != null:
 		target_pos = target.position
 		vel = (target_pos - position).normalized() * speed
@@ -71,19 +98,21 @@ func anim():
 
 
 
-func _on_enemy_body_entered(body):
-	pass
-#	if body.name == 'player':
-#		if position.x > body.position.x:
-#
-#		elif position.x <= body.position.x:
-#			position.x -= 50
-
-
 func _on_enemy_area_entered(area):
-	print(area.name)
+	#if area != self:
+	if area.is_in_group('enemies'):
+		#print('asdf')
+		#print('asdf')
+		colliding_body = area
+		colliding = true
+	#print(area.name)
+	if area.name == 'player':
+		area.vel *= -100
+	
+func _on_enemy_area_exited(area):
+	if area == colliding_body:
+		colliding = false
 
-
-func _on_detect_radius_body_entered(body):
-	if body.name == 'player':
-		target = body
+func _on_detect_radius_area_entered(area):
+	if area.name == 'player':
+		target = area
