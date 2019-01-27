@@ -52,7 +52,7 @@ audio_bus_name = "Master"
 
 [node name="detect_body" type="CollisionShape2D" parent="detect_radius" index="0"]
 
-position = Vector2( -0.617096, -0.241731 )
+position = Vector2( -4.04276, -1.4305 )
 scale = Vector2( 0.167525, 0.0747441 )
 shape = SubResource( 2 )
 

@@ -135,7 +135,7 @@ func _on_enemy_area_entered(area):
 		#print('collider added')
 		colliding = true
 	#print(area.name)
-	if area.name == 'player':
+	if area.is_in_group('players'):
 		area.vel *= -100
 	
 func _on_enemy_area_exited(area):
