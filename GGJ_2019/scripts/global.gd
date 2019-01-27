@@ -16,3 +16,6 @@ var final_stage_beaten = 0
 
 #if final_stage_beaten == 2:
 #	endgame = true
+
+
+var player_health = 15

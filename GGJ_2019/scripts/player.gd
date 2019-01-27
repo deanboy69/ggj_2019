@@ -78,6 +78,7 @@ func _ready():
 	
 	
 func _physics_process(delta):
+	global.player_health = health
 	#pos = get_global_position()
 	#print(p_u.get_global_position())
 	#take_damage()
